@@ -11,7 +11,7 @@ export default async function clickup(toTelegram: boolean){
     ]
   });
   const page = await browser.newPage();
-  const AWAIT = 10 * 1000;
+  const AWAIT = 20 * 1000;
 
   // Acessando página com as tarefas
   await page.goto('https://app.clickup.com/login');
