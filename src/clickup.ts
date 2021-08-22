@@ -11,7 +11,7 @@ export default async function clickup(toTelegram: boolean){
     ]
   });
   const page = await browser.newPage();
-  const AWAIT = 5 * 1000;
+  const AWAIT = 10 * 1000;
 
   // Acessando página com as tarefas
   await page.goto('https://app.clickup.com/login');
@@ -19,7 +19,7 @@ export default async function clickup(toTelegram: boolean){
   await page.type('[type="email"]', process.env.LOGIN_CLICKUP || '');
   await page.type('[type="password"]', process.env.PASSWORD_CLICKUP || '');
   await page.click('[type="submit"]');
-  await page.waitForTimeout(10000);
+  await page.waitForTimeout(AWAIT);
   await page.click('[data-test="simple-sidebar-home-item"]');
   await page.waitForTimeout(AWAIT);
   await page.click('cu-user-inbox cu-inbox-section:nth-child(4) [data-test="inbox-list__title"]');
