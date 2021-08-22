@@ -9,7 +9,6 @@ export default async function clickup(toTelegram: boolean){
       '--no-sandbox',
       '--disable-setuid-sandbox'
     ],
-    headless: false
   });
   const page = await browser.newPage();
   const AWAIT = 10 * 1000;
