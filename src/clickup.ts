@@ -8,10 +8,11 @@ export default async function clickup(toTelegram: boolean){
     'args' : [
       '--no-sandbox',
       '--disable-setuid-sandbox'
-    ]
+    ],
+    headless: false
   });
   const page = await browser.newPage();
-  const AWAIT = 20 * 1000;
+  const AWAIT = 10 * 1000;
 
   // Acessando página com as tarefas
   await page.goto('https://app.clickup.com/login');
@@ -22,7 +23,7 @@ export default async function clickup(toTelegram: boolean){
   await page.waitForTimeout(AWAIT);
   await page.click('[data-test="simple-sidebar-home-item"]');
   await page.waitForTimeout(AWAIT);
-  await page.click('cu-user-inbox cu-inbox-section:nth-child(4) [data-test="inbox-list__title"]');
+  await page.click('cu-user-inbox > cu-inbox-section:nth-child(4) > cu-inbox-list > div.cu-inbox-list__header > div.cu-inbox-list__title.ng-star-inserted');
   await page.waitForTimeout(AWAIT);
 
   // Coletando atividades

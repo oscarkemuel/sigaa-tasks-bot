@@ -11,7 +11,7 @@ export default async function sigaa(toTelegram: boolean) {
     ]
   });
   const page = await browser.newPage();
-  const AWAIT = 20 * 1000;
+  const AWAIT = 10 * 1000;
 
   // Acessando página do discente
   await page.goto('https://sigaa.ufrn.br/sigaa/public/home.jsf');
