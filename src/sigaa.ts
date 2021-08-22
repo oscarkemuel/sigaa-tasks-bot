@@ -4,7 +4,12 @@ import { Telegram } from 'telegraf';
 import getMessage from './utils/message';
 
 export default async function sigaa(toTelegram: boolean) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    'args' : [
+      '--no-sandbox',
+      '--disable-setuid-sandbox'
+    ]
+  });
   const page = await browser.newPage();
   const AWAIT = 5 * 1000;
 
