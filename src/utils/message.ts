@@ -5,8 +5,8 @@ interface activitiesInterface{
   status?: string;
 }
 
-export default function getMessage(chores: activitiesInterface[]): string{
-  let message: string = chores[0].matter ? '\nSIGAA\n' : '';
+export function getMessage(chores: activitiesInterface[]): string{
+  let message: string = '\nSIGAA\n';
   message = message.concat('------------------------------------------------');
 
   for (let i = 0; i < chores.length; i++) {

@@ -1,9 +1,7 @@
 require('dotenv').config();
 import puppeteer from 'puppeteer';
-import { Telegram } from 'telegraf';
-import getMessage from './utils/message';
 
-export default async function sigaa(toTelegram: boolean) {
+export async function getTasks() {
   const browser = await puppeteer.launch({
     'args' : [
       '--no-sandbox',
@@ -45,20 +43,6 @@ export default async function sigaa(toTelegram: boolean) {
   });
 
   await browser.close();
-
-  if(toTelegram){
-    const telegram = new Telegram(process.env.TELEGRAM_TOKEN || '');
-
-    try {
-      if(activities.length == 0){
-        await telegram.sendMessage(process.env.TELEGRAM_CHAT_ID || '', 'SEM ATIVIDADES NO SIGAA');
-      }else {
-        await telegram.sendMessage(process.env.TELEGRAM_CHAT_ID || '', getMessage(activities));
-      }
-    } catch (error) {
-        await telegram.sendMessage(process.env.TELEGRAM_CHAT_ID || '', 'OCORREU ALGUM PROBLEMA');
-    }
-  }
 
   return activities;
 }
