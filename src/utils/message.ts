@@ -6,7 +6,7 @@ interface activitiesInterface{
 }
 
 export default function getMessage(chores: activitiesInterface[]): string{
-  let message: string = chores[0].matter ? '\nSIGAA\n' : '\nCLICKUP\n';
+  let message: string = chores[0].matter ? '\nSIGAA\n' : '';
   message = message.concat('------------------------------------------------');
 
   for (let i = 0; i < chores.length; i++) {
