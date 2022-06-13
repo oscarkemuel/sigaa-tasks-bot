@@ -39,7 +39,9 @@ export default async function sigaa(toTelegram: boolean) {
       return {date, matter, title, status};
     });
 
-    return chores;
+    const choresFiltred = chores.filter((chore) => chore.status === 'ABERTO')
+
+    return choresFiltred;
   });
 
   await browser.close();
