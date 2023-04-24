@@ -6,7 +6,8 @@ export async function getTasks() {
     'args' : [
       '--no-sandbox',
       '--disable-setuid-sandbox'
-    ]
+    ],
+    headless: false,
   });
   const page = await browser.newPage();
   const AWAIT = 10 * 1000;

@@ -8,12 +8,14 @@
     "@types/node": "^16.7.1",
     "nodemon": "^2.0.12",
     "ts-node": "^10.2.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "tsup": "^6.7.0",
+    "tsx": "^3.12.6"
   },
   "scripts": {
+    "build": "tsup src",
     "start": "node dist/app.js",
-    "build": "tsc -p .",
-    "dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts"
+    "start:dev": "tsx watch src/server.ts"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
