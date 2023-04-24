@@ -6,6 +6,8 @@ import { getMessage } from './utils/message';
 
 const app = express();
 
+app.use(express.static('public'));
+
 app.get('/sigaa', async (_, res) => {
   const tasks = await getTasks();
 
