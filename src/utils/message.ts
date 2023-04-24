@@ -3,11 +3,12 @@ interface activitiesInterface{
   date: string;
   matter?: string;
   status?: string;
+  statusImg?: string;
 }
 
 export function getMessage(chores: activitiesInterface[]): string{
   let message: string = '\nSIGAA\n';
-  message = message.concat('------------------------------------------------');
+  message = message.concat('--------------------------------------');
 
   for (let i = 0; i < chores.length; i++) {
     const todo = chores[i];
@@ -17,14 +18,14 @@ export function getMessage(chores: activitiesInterface[]): string{
       message = message.concat(`\n${sequential}. ${todo.matter}`);
       message = message.concat(`\n${todo.date}`);
       message = message.concat(`\n${todo.title}`);
-      message = message.concat(`\n(${todo.status})\n`);
+      message = message.concat(`\n(${todo.status})${todo.statusImg ? ` ${todo.statusImg}` : ''}\n`);
     }else{
       message = message.concat(`\n${sequential}. ${todo.title}`);
       message = message.concat(`\n${todo.date}\n`);
     }
   }
 
-  message = message.concat('------------------------------------------------')
+  message = message.concat('--------------------------------------')
 
   return message;
 }

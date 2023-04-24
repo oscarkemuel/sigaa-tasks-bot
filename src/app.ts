@@ -27,7 +27,7 @@ app.get('/sigaa/telegram', async (_, res) => {
       await telegram.sendMessage(process.env.TELEGRAM_CHAT_ID || '', 'OCORREU ALGUM PROBLEMA');
   }
 
-  res.status(204);
+  res.status(204).send({});
 })
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server on port ${process.env.PORT || 3000}`))

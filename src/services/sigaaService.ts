@@ -7,7 +7,7 @@ export async function getTasks() {
       '--no-sandbox',
       '--disable-setuid-sandbox'
     ],
-    headless: false,
+    headless: true,
   });
   const page = await browser.newPage();
   const AWAIT = 10 * 1000;
@@ -35,7 +35,17 @@ export async function getTasks() {
       const title = text.split('\n')[1];
       const status = date.includes('(') ? 'ABERTO' : 'ENCERRADO';
 
-      return {date, matter, title, status};
+      let statusImg;
+      const iconStatus = todo.querySelector('td:nth-child(1) > img');
+      if (iconStatus) {
+        if (iconStatus.getAttribute('title') === 'Atividade concluída') {
+          statusImg = "✅"
+        } else {
+          statusImg = "❗"
+        }
+      }
+
+      return {date, matter, title, status, statusImg};
     });
 
     const choresFiltred = chores.filter((chore) => chore.status === 'ABERTO')
