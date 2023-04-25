@@ -8,6 +8,7 @@ export async function getTasks() {
       '--disable-setuid-sandbox'
     ],
     headless: true,
+    ignoreDefaultArgs: ['--disable-extensions']
   });
   const page = await browser.newPage();
   const AWAIT = 10 * 1000;
