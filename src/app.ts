@@ -1,9 +1,12 @@
 import express from 'express';
 
 import SigaaService from './services/sigaaService';
+import botService from './services/botService';
 
 const app = express();
 app.use(express.json());
+
+botService.hearBot();
 
 app.get('/', (_, res) => {
   res.status(200).json({

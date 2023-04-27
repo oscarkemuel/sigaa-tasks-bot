@@ -1,6 +1,6 @@
 require('dotenv').config();
 import puppeteer from 'puppeteer';
-import TelegramService from './telegramService';
+import MessageService from './messageService';
 
 interface IActivities{
   title: string;
@@ -13,12 +13,12 @@ interface IActivities{
 class SigaaService {
   private login;
   private password;
-  private telegramService;
+  private messageService;
 
   constructor() {
     this.login = process.env.LOGIN_SIGAA || '';
     this.password = process.env.PASSWORD_SIGAA || '';
-    this.telegramService = TelegramService;
+    this.messageService = MessageService;
   }
 
   async getTasks() {
@@ -107,11 +107,11 @@ class SigaaService {
     const tasks = await this.getTasks();
 
     if(tasks.length == 0){
-      await this.telegramService.sendMessage('SEM ATIVIDADES NO SIGAA');
+      await this.messageService.sendMessage('SEM ATIVIDADES NO SIGAA', true);
     } else {
       const message = this.formatMessage(tasks);
 
-      await this.telegramService.sendMessage(message);
+      await this.messageService.sendMessage(message, true);
     }
   }
 }
