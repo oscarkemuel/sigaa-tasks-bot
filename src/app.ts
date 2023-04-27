@@ -1,36 +1,36 @@
 import express from 'express';
-import { Telegram } from 'telegraf';
 
-import { getTasks } from './services/sigaaService';
-import { getMessage } from './utils/message';
+import SigaaService from './services/sigaaService';
 
 const app = express();
+app.use(express.json());
 
-app.use(express.static('public'));
+app.get('/', (_, res) => {
+  res.status(200).json({
+    routes: [
+      {
+        route: '/sigaa',
+        description: 'Get all tasks from SIGAA in JSON format'
+      },
+      {
+        route: '/sigaa/telegram',
+        description: 'Send all tasks from SIGAA to telegram'
+      }
+    ]
+  });
+})
 
 app.get('/sigaa', async (_, res) => {
-  const tasks = await getTasks();
+  const tasks = await SigaaService.getTasks();
 
-  res.status(200).send(tasks);
+  res.status(200).json(tasks);
 })
 
 app.get('/sigaa/telegram', async (_, res) => {
-  const tasks = await getTasks();
-
-  const telegram = new Telegram(process.env.TELEGRAM_TOKEN || '');
-
-  try {
-    if(tasks.length == 0){
-      await telegram.sendMessage(process.env.TELEGRAM_CHAT_ID || '', 'SEM ATIVIDADES NO SIGAA');
-    }else {
-      await telegram.sendMessage(process.env.TELEGRAM_CHAT_ID || '', getMessage(tasks));
-    }
-  } catch (error) {
-      await telegram.sendMessage(process.env.TELEGRAM_CHAT_ID || '', 'OCORREU ALGUM PROBLEMA');
-  }
+  SigaaService.sendTasksToTelegram();
 
   res.status(200).send({
-    tasks
+    status: `SIGAA tasks sent to telegram - ${new Date().toLocaleString('pt-BR')}`
   });
 })
 
